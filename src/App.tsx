@@ -23,25 +23,24 @@ const cleanString = (raw: string) => {
   return cleaned
 }
 
-class App extends React.Component<{}, { content: string, prompt: string, words: number }> {
+const defaultState = JSON.stringify({ content: '', words: 0 })
+
+class App extends React.Component<{}, { content: string, words: number }> {
   constructor (props: any) {
     super(props)
-    this.state = {
-      content: '',
-      prompt: '',
-      words: 0
-    }
+    this.state = JSON.parse(localStorage.getItem('state') || defaultState)
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange (value: string) {
     const test = cleanString(value)
     const matches = test.trim().match(/\S+/g)
-    console.log(matches)
     if (matches && tags.includes(matches[matches?.length - 1])) {
       matches.pop()
     }
-    this.setState({ content: value, words: matches?.length ?? 0 })
+    const state = { content: value, words: matches?.length ?? 0 }
+    localStorage.setItem('state', JSON.stringify(state))
+    this.setState(state)
   }
 
   render () {
