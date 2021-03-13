@@ -37,3 +37,46 @@ body, .quill > .ql-container > .ql-editor.ql-blank::before {
   text-decoration: underline;
   color: black;
 }
+
+/* Animation stuff */
+
+.fade-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.fade-enter-active, .fade-exit-active {
+  transition: opacity 250ms, transform 250ms;
+}
+
+.spin-enter {
+  transform: rotate('0deg');
+}
+.spin-exit {
+  transform: rotate('180deg')
+}
+.spin-enter-active {
+  transform: rotate('180deg')
+}
+.spin-exit-active {
+  transform: rotate('0deg');
+}
+.spin-enter-active,
+.spin-exit-active {
+  transition: rotate 0.5s ease-in-out 0ms;
+}

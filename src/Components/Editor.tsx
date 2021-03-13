@@ -12,10 +12,10 @@ const styles: React.CSSProperties = {
 }
 
 const adjs = [
-  'excellent', 'thought-provoking', 'insightful',
+  'audacious', 'compelling', 'insightful', 'quirky',
   'controversial', 'humorous', 'articulate', 'witty',
-  'comprehensive', 'crisp', 'eloquent', 'emphatic', 'formal',
-  'ornate', 'rhetorical', 'rhetorical', 'succinct', 'concise', 'wordy'
+  'confounding', 'crisp', 'eloquent', 'emphatic', 'formal',
+  'ornate', 'rhetorical', 'succinct', 'concise', 'wordy'
 ]
 
 class Editor extends React.Component<{ content: string, onChange: (value: string) => void }> {

@@ -2,7 +2,15 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import { ThemeProvider, StyleReset } from 'atomize'
+import { Provider as StyletronProvider, DebugEngine } from 'styletron-react'
+import { Client as Styletron } from 'styletron-engine-atomic'
 import 'react-quill/dist/quill.snow.css'
+
+const debug =
+  process.env.NODE_ENV === 'production' ? undefined : new DebugEngine()
+
+// 1. Create a client engine instance
+const engine = new Styletron()
 
 const theme = {
   colors: {
@@ -20,10 +28,12 @@ const theme = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <StyleReset />
-      <App />
-    </ThemeProvider>
+    <StyletronProvider value={engine} debug={debug} debugAfterHydration>
+      <ThemeProvider theme={theme}>
+        <StyleReset />
+        <App />
+      </ThemeProvider>
+    </StyletronProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
