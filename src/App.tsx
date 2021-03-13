@@ -68,7 +68,7 @@ class App extends React.Component<{}, { content: string, words: number, prompt: 
   // }
 
   render () {
-    const showPrompt = !this.state.forceDrawer && (this.state.words < 3 || cleanString(this.state.prompt) !== ' ')
+    const showPrompt = !this.state.forceDrawer && (this.state.words <= 3 || cleanString(this.state.prompt) !== ' ')
 
     return (
       <div className='align-content-center'>
