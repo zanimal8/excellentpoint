@@ -103,17 +103,7 @@ class App extends React.Component<{}, { content: string, words: number, prompt: 
                   </CSSTransition>
                 </SwitchTransition>
                 <Col xs={1}>
-                  <SwitchTransition>
-                    <CSSTransition
-                      key={showPrompt ? 'Right' : 'Left'}
-                      addEndListener={(node, done) => {
-                        node.addEventListener('transitionend', done, false)
-                      }}
-                      classNames='spin'
-                    >
                   <ToggleButton right={showPrompt} className='mx-auto' onChange={this.openDrawer}/>
-                  </CSSTransition>
-                  </SwitchTransition>
                 </Col>
               </Row>
             </Col>
