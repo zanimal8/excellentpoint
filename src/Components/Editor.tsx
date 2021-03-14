@@ -32,7 +32,7 @@ const Editor: React.FC<PropTypes> = (props: PropTypes) => {
       className='shadow'
       style={styles}
       theme='bubble'
-      value={value}
+      value={value || ''}
       onChange={setVal}
       modules={{ toolbar: false }} />
   )
