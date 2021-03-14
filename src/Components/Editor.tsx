@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactQuill from 'react-quill'
 
 const styles: React.CSSProperties = {
@@ -18,23 +18,24 @@ const adjs = [
   'ornate', 'rhetorical', 'succinct', 'concise', 'wordy'
 ]
 
-class Editor extends React.Component<{ content: string, onChange: (value: string) => void }> {
-  modules = { toolbar: false }
+interface PropTypes { content: string, onChange: (value: string) => void }
 
-  render () {
-    return (
-      <div>
-        <ReactQuill
-          placeholder={`start typing your ${adjs[Math.floor(Math.random() * adjs.length)]} response here...`}
-          className='shadow'
-          style={styles}
-          theme='bubble'
-          value={this.props.content}
-          onChange={this.props.onChange}
-          modules={this.modules} />
-      </div>
-    )
+const Editor: React.FC<PropTypes> = (props: PropTypes) => {
+  const [value, setValue] = useState(props.content)
+  const setVal = (val: string) => {
+    setValue(val)
+    props.onChange(val)
   }
+  return (
+    <ReactQuill
+      placeholder={`start typing your ${adjs[Math.floor(Math.random() * adjs.length)]} response here...`}
+      className='shadow'
+      style={styles}
+      theme='bubble'
+      value={value}
+      onChange={setVal}
+      modules={{ toolbar: false }} />
+  )
 }
 
 export default Editor

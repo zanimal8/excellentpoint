@@ -28,13 +28,13 @@ const cleanString = (raw: string) => {
   return cleaned || ''
 }
 
-const defaultState = JSON.stringify({ content: '', words: 0, prompt: '', forceDrawer: false, transitioning: false })
+const defaultState = JSON.stringify({ content: '', words: 0, prompt: '', drawer: false, force: false, transitioning: false })
 
-class App extends React.Component<{}, { content: string, words: number, prompt: string, forceDrawer: boolean, transitioning: boolean }> {
+class App extends React.Component<{}, { content: string, words: number, prompt: string, drawer: boolean, force: boolean, transitioning: boolean }> {
   constructor (props: any) {
     super(props)
     this.state = JSON.parse(localStorage.getItem('state') || defaultState)
-    this.state = { ...this.state, forceDrawer: false, transitioning: false }
+    this.state = { ...this.state, drawer: true, transitioning: false }
 
     this.setContent = this.setContent.bind(this)
     this.setPrompt = this.setPrompt.bind(this)
@@ -42,25 +42,26 @@ class App extends React.Component<{}, { content: string, words: number, prompt: 
     // this.toggleTrans = this.toggleTrans.bind(this)
   }
 
-  setContent (value: string) {
-    const test = cleanString(value)
+  setContent (content: string) {
+    const test = cleanString(content)
     const matches = test.trim().match(/\S+/g) || []
     if (matches && tags.includes(matches[matches?.length - 1])) {
       matches.pop()
     }
-    const state = { content: value, words: matches?.length ?? 0, prompt: this.state.prompt }
+    const words = matches?.length ?? 0
+    const state = { ...this.state, content, words }
     localStorage.setItem('state', JSON.stringify(state))
     this.setState(state)
   }
 
   setPrompt (value: string) {
-    const state = { ...this.state, prompt: value }
+    const state = { ...this.state, prompt: value, drawer: true }
     localStorage.setItem('state', JSON.stringify(state))
     this.setState(state)
   }
 
   openDrawer () {
-    this.setState({ forceDrawer: !this.state.forceDrawer })
+    this.setState({ drawer: !this.state.drawer })
   }
 
   // toggleTrans () {
@@ -68,8 +69,7 @@ class App extends React.Component<{}, { content: string, words: number, prompt: 
   // }
 
   render () {
-    const showPrompt = !this.state.forceDrawer && (this.state.words <= 3 || cleanString(this.state.prompt) !== ' ')
-
+    const showPrompt = this.state.drawer
     return (
       <div className='align-content-center'>
         <div>
