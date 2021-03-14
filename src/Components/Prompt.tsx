@@ -2,7 +2,7 @@ import React from 'react'
 import ReactQuill from 'react-quill'
 
 const styles: React.CSSProperties = {
-  height: 200,
+  height: 'auto',
   border: '0.5px solid #CCC',
   padding: '6px 10px',
   borderRadius: 10,
