@@ -20,7 +20,7 @@ const Prompt: React.FC<PropTypes> = (props: PropTypes) => {
       className='shadow-sm'
       style={styles}
       theme='bubble'
-      value={props.content}
+      defaultValue={props.content}
       onChange={props.onChange}
       modules={modules} />
   )

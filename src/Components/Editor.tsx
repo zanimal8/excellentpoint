@@ -22,7 +22,7 @@ interface PropTypes { content: string, onChange: (value: string) => void }
 
 const Editor: React.FC<PropTypes> = (props: PropTypes) => {
   const [value, setValue] = useState(props.content)
-  const setVal = (val: string) => {
+  const setVal = (val: string, delta: any, source: string, editor: any) => {
     setValue(val)
     props.onChange(val)
   }
@@ -32,7 +32,7 @@ const Editor: React.FC<PropTypes> = (props: PropTypes) => {
       className='shadow'
       style={styles}
       theme='bubble'
-      value={value || ''}
+      defaultValue={value || ''}
       onChange={setVal}
       modules={{ toolbar: false }} />
   )
