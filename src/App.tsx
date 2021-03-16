@@ -13,7 +13,7 @@ const tags = ['p', 'h1', 'h2', 'h3', 'em', 'strong'].flatMap(tag => {
   return [`<${tag}>`, `</${tag}>`]
 })
 
-const specials = ['&nbsp;', '<br>', ...',./;<>?:"[]\\{}|-=_+!@#$%^*()'.split('')]
+const specials = ['&nbsp;', '<br>']
 
 const cleanString = (raw: string) => {
   let cleaned = raw
@@ -30,7 +30,7 @@ const cleanString = (raw: string) => {
 
 const countWords = (content: string) => {
   const test = cleanString(content)
-  const matches = test.trim().match(/\S+/g) || []
+  const matches = test.trim().match(/\b[-?'?(\w+)?]+\b/gi) || []
   if (matches && tags.includes(matches[matches?.length - 1])) {
     matches.pop()
   }
