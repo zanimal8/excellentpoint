@@ -13,7 +13,7 @@ const tags = ['p', 'h1', 'h2', 'h3', 'em', 'strong'].flatMap(tag => {
   return [`<${tag}>`, `</${tag}>`]
 })
 
-const specials = ['&nbsp;', '<br>']
+const specials = ['&nbsp;', '<br>', ...',./;<>?:"[]\\{}|-=_+!@#$%^*()'.split('')]
 
 const cleanString = (raw: string) => {
   let cleaned = raw
