@@ -24,7 +24,7 @@ body, .quill > .ql-container > .ql-editor.ql-blank::before {
   color: rgb(60, 64, 67);
 }
 
-.ql-editor li {
+.ql-editor ul, .ql-editor ol {
   padding: 0 !important;
 }
 
