@@ -28,6 +28,15 @@ const cleanString = (raw: string) => {
   return cleaned || ''
 }
 
+const countWords = (content: string) => {
+  const test = cleanString(content)
+  const matches = test.trim().match(/\S+/g) || []
+  if (matches && tags.includes(matches[matches?.length - 1])) {
+    matches.pop()
+  }
+  return matches?.length ?? 0
+}
+
 const defaultState = JSON.stringify({ content: '', words: 0, prompt: '', drawer: false, force: false, transitioning: false, goal: 100 })
 
 interface State {
@@ -53,12 +62,7 @@ class App extends React.Component<{}, State> {
   }
 
   setContent (content: string) {
-    const test = cleanString(content)
-    const matches = test.trim().match(/\S+/g) || []
-    if (matches && tags.includes(matches[matches?.length - 1])) {
-      matches.pop()
-    }
-    const words = matches?.length ?? 0
+    const words = countWords(content)
     const state = { ...this.state, content, words }
     localStorage.setItem('state', JSON.stringify(state))
     this.setState(state)
@@ -103,7 +107,7 @@ class App extends React.Component<{}, State> {
                 />
               </Row>
               <Row className='d-flex'>
-                <Editor content={this.state.content} onChange={this.setContent}/>
+                <Editor content={this.state.content} onChange={this.setContent} countWords={countWords}/>
               </Row>
             </Col>
             <Col xs={12} lg={4} className='mt-xs-0 pt-2 mt-lg-5'>
