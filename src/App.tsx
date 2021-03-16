@@ -91,7 +91,7 @@ class App extends React.Component<{}, State> {
         <div>
           <Header/>
         </div>
-        <Container className=''>
+        <Container className='mx-auto'>
           <Row>
             <Col style={{ maxWidth: 850 }} xs={12} lg={8}>
               <Row className='justify-content-center d-block'>
@@ -116,14 +116,14 @@ class App extends React.Component<{}, State> {
                     }}
                     classNames='fade'
                     >
-                        <Col xs={11}>
+                        <Col xs={9} sm={10} md={11}>
                         {
                           showPrompt && <Prompt className='mx-auto' content={this.state.prompt} onChange={this.setPrompt} />
                         }
                         </Col>
                   </CSSTransition>
                 </SwitchTransition>
-                <Col xs={1}>
+                <Col xs={2} md={1}>
                   <ToggleButton right={showPrompt} className='mx-auto' onChange={this.openDrawer}/>
                 </Col>
               </Row>
