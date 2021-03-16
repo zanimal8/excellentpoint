@@ -31,7 +31,6 @@ const ReportArea = (props: PropTypes) => (
       <label htmlFor='progress'><em>progress</em></label>
       <ProgressBar
         id='progress'
-        animated={props.words / props.goal > 1}
         className={`${props.words / props.goal >= 1 ? 'green' : 'purp'} mt-1 w-100`}
         style={{
           height: '45%'
