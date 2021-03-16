@@ -32,7 +32,7 @@ const ReportArea = (props: PropTypes) => (
       <ProgressBar
         id='progress'
         animated={props.words / props.goal > 1}
-        className={`${props.words / props.goal > 1 ? 'green' : 'purp'} mt-1 w-100`}
+        className={`${props.words / props.goal >= 1 ? 'green' : 'purp'} mt-1 w-100`}
         style={{
           height: '45%'
         }}
