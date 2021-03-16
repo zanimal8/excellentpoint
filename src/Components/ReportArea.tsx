@@ -32,7 +32,10 @@ const ReportArea = (props: PropTypes) => (
       <ProgressBar
         id='progress'
         animated={props.words / props.goal > 1}
-        className={`${props.words / props.goal > 1 ? 'green' : 'purp'} mt-2 w-100`}
+        className={`${props.words / props.goal > 1 ? 'green' : 'purp'} mt-1 w-100`}
+        style={{
+          height: '45%'
+        }}
         max={1}
         now={props.words / props.goal}
         label={`${(100 * props.words / props.goal).toFixed(0)}%`}
