@@ -18,9 +18,10 @@ body, .quill > .ql-container > .ql-editor.ql-blank::before {
   font-size: 1.1rem !important;
 }
 
-.ql-editor p {
+.ql-editor p, .ql-editor ul, .ql-editor li, .ql-editor ol {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 1.1rem !important;
+  color: rgb(60, 64, 67);
 }
 
 .number {
