@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReactQuill from 'react-quill'
 
 const styles: React.CSSProperties = {
-  height: 400,
+  height: 445,
   backgroundColor: '#F8F8F8',
   border: '1px solid #CCC',
   padding: '6px 10px',
