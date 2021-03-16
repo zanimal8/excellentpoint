@@ -24,6 +24,10 @@ body, .quill > .ql-container > .ql-editor.ql-blank::before {
   color: rgb(60, 64, 67);
 }
 
+.ql-editor li {
+  padding: 0 !important;
+}
+
 .number {
   font-size: 1.5rem;
   padding: 0.25rem;
