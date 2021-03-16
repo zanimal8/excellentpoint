@@ -106,7 +106,7 @@ class App extends React.Component<{}, State> {
                 <Editor content={this.state.content} onChange={this.setContent}/>
               </Row>
             </Col>
-            <Col xs={12} lg={4} className='mt-xs-0 mt-lg-5'>
+            <Col xs={12} lg={4} className='mt-xs-0 pt-2 mt-lg-5'>
               <Row>
                 <SwitchTransition>
                   <CSSTransition
