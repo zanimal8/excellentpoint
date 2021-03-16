@@ -25,14 +25,14 @@ const ReportArea = (props: PropTypes) => (
     </div> */}
     <div className='mx-3'>
       <label htmlFor='goal'><em>goal</em></label>
-      <EditableField value={`${props.goal || 1}`} onChange={props.onChange} className='number'/>
+      <EditableField value={`${props.goal || 1}`} onChange={props.onChange} className='number number-editable'/>
     </div>
     <div className='w-100 mx-3 d-flex-col align-items-end'>
       <label htmlFor='progress'><em>progress</em></label>
       <ProgressBar
         id='progress'
         animated={props.words / props.goal > 1}
-        className={`${props.words / props.goal > 1 ? 'green' : 'purp'} my-auto w-100 mt-1`}
+        className={`${props.words / props.goal > 1 ? 'green' : 'purp'} mt-2 w-100`}
         max={1}
         now={props.words / props.goal}
         label={`${(100 * props.words / props.goal).toFixed(0)}%`}
