@@ -1,4 +1,5 @@
 import React from 'react'
+import Instructions from './Components/Instructions'
 import Editor from './Components/Editor'
 import Prompt from './Components/Prompt'
 import Header from './Components/Header'
@@ -7,6 +8,7 @@ import ToggleButton from './Components/ToggleButton'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import { Container, Row, Col } from 'react-bootstrap'
 import './App.css'
+import About from './Components/About'
 
 // String Cleaning
 const tags = ['p', 'h1', 'h2', 'h3', 'em', 'strong'].flatMap(tag => {
@@ -92,48 +94,59 @@ class App extends React.Component<{}, State> {
     const showPrompt = this.state.drawer
     return (
       <div className='align-content-center'>
-        <div>
+        <header>
           <Header/>
-        </div>
-        <Container className='mx-auto'>
-          <Row>
-            <Col style={{ maxWidth: 850 }} xs={12} lg={8}>
-              <Row className='justify-content-center d-block'>
-                <ReportArea
-                  words={this.state.words}
-                  chars={cleanString(this.state.content).length}
-                  goal={this.state.goal}
-                  onChange={this.setGoal}
-                />
-              </Row>
-              <Row className='d-flex'>
-                <Editor content={this.state.content} onChange={this.setContent} countWords={countWords}/>
-              </Row>
-            </Col>
-            <Col xs={12} lg={4} className='mt-xs-0 pt-2 mt-lg-5'>
-              <Row>
-                <SwitchTransition>
-                  <CSSTransition
-                    key={showPrompt ? 'prompt' : 'button'}
-                    addEndListener={(node, done) => {
-                      node.addEventListener('transitionend', done, false)
-                    }}
-                    classNames='fade'
-                    >
-                        <Col xs={9} sm={10} md={11}>
-                        {
-                          showPrompt && <Prompt className='mx-auto' content={this.state.prompt} onChange={this.setPrompt} />
-                        }
-                        </Col>
-                  </CSSTransition>
-                </SwitchTransition>
-                <Col xs={2} md={1}>
-                  <ToggleButton right={showPrompt} className='mx-auto' onChange={this.openDrawer}/>
-                </Col>
-              </Row>
-            </Col>
+        </header>
+        <section>
+          <Container className='mx-auto p-xs-3' fluid='md'>
+            <Row>
+              <Col style={{ maxWidth: 850 }} xs={12} lg={8}>
+                <Row className='justify-content-center d-block'>
+                  <ReportArea
+                    words={this.state.words}
+                    chars={cleanString(this.state.content).length}
+                    goal={this.state.goal}
+                    onChange={this.setGoal}
+                  />
+                </Row>
+                <Row className='d-flex'>
+                  <Editor content={this.state.content} onChange={this.setContent} countWords={countWords}/>
+                </Row>
+              </Col>
+              <Col xs={12} lg={4} className='mt-xs-0 pt-2 mt-lg-5'>
+                <Row>
+                  <SwitchTransition>
+                    <CSSTransition
+                      key={showPrompt ? 'prompt' : 'button'}
+                      addEndListener={(node, done) => {
+                        node.addEventListener('transitionend', done, false)
+                      }}
+                      classNames='fade'
+                      >
+                          <Col xs={9} sm={10} md={11}>
+                          {
+                            showPrompt && <Prompt className='mx-auto' content={this.state.prompt} onChange={this.setPrompt} />
+                          }
+                          </Col>
+                    </CSSTransition>
+                  </SwitchTransition>
+                  <Col xs={2} md={1}>
+                    <ToggleButton right={showPrompt} className='mx-auto' onChange={this.openDrawer}/>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </Container>
+          <Container className='mx-auto mt-5 pt-5 mb-4' fluid='md'>
+          <Row xs={12} md={10} lg={8}>
+            <Col xs={11} sm={4} lg={6}><About/></Col>
+            <Col xs={11} sm={8} lg={6}><Instructions /></Col>
           </Row>
         </Container>
+        </section>
+        <footer>
+
+        </footer>
       </div>
     )
   }
