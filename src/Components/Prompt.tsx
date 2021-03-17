@@ -3,6 +3,7 @@ import ReactQuill from 'react-quill'
 
 const styles: React.CSSProperties = {
   height: 'auto',
+  minHeight: 90,
   maxHeight: 445,
   overflow: 'scroll',
   border: '0.5px solid #CCC',

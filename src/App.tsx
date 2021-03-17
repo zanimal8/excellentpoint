@@ -130,8 +130,8 @@ class App extends React.Component<{}, State> {
                           </Col>
                     </CSSTransition>
                   </SwitchTransition>
-                  <Col xs={2} md={1}>
-                    <ToggleButton right={showPrompt} className='mx-auto' onChange={this.openDrawer}/>
+                  <Col className='mx-xs-0 mx-md-auto' xs={1}>
+                    <ToggleButton right={showPrompt} onChange={this.openDrawer}/>
                   </Col>
                 </Row>
               </Col>
