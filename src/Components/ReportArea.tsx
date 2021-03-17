@@ -29,7 +29,7 @@ const ReportArea = (props: PropTypes) => (
         }}
         max={1}
         now={props.words / props.goal}
-        label={`${(100 * props.words / props.goal).toFixed(0)}%`}
+        label={`${Math.trunc(100 * props.words / props.goal)}%`}
       />
       </div>
   </div>
