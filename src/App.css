@@ -103,3 +103,10 @@ body, .quill > .ql-container > .ql-editor.ql-blank::before {
   transition: all cubic-bezier(0.19, 1, 0.22, 1) 1s;
 }
 
+.green .progress-bar {
+  background-color: #4bb44b;
+}
+
+.purp .progress-bar {
+  background-color: #6d57ff;
+}

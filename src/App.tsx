@@ -39,13 +39,12 @@ const countWords = (test: string) => {
   return matches?.length ?? 0
 }
 
-const defaultState = JSON.stringify({ content: '', htmlContent: '', words: 0, selected: 0, prompt: '', drawer: false, force: false, transitioning: false, goal: 100 })
+const defaultState = JSON.stringify({ content: '', htmlContent: '', words: 0, prompt: '', drawer: false, force: false, transitioning: false, goal: 100 })
 
 interface State {
   content: string,
   htmlContent: string,
   words: number,
-  selected: number,
   prompt: string,
   drawer: boolean,
   force: boolean,
@@ -57,13 +56,12 @@ class App extends React.Component<{}, State> {
   constructor (props: any) {
     super(props)
     this.state = JSON.parse(localStorage.getItem('state') || defaultState)
-    this.state = { ...this.state, drawer: true, transitioning: false, selected: 0 }
+    this.state = { ...this.state, drawer: true, transitioning: false }
 
     this.setContent = this.setContent.bind(this)
     this.setPrompt = this.setPrompt.bind(this)
     this.openDrawer = this.openDrawer.bind(this)
     this.setGoal = this.setGoal.bind(this)
-    this.setSelected = this.setSelected.bind(this)
   }
 
   setContent (content: string, htmlContent: string) {
@@ -89,10 +87,6 @@ class App extends React.Component<{}, State> {
     localStorage.setItem('state', JSON.stringify(state))
   }
 
-  setSelected (selected: number) {
-    this.setState({ selected })
-  }
-
   // toggleTrans () {
   //   this.setState({ transitioning: !this.state.transitioning })
   // }
@@ -113,12 +107,11 @@ class App extends React.Component<{}, State> {
                     words={this.state.words}
                     chars={this.state.content.length}
                     goal={this.state.goal}
-                    selected={this.state.selected}
                     onChange={this.setGoal}
                   />
                 </Row>
                 <Row className='d-flex'>
-                  <Editor content={this.state.htmlContent || this.state.content} onChange={this.setContent} countWords={countWords} setSelection={this.setSelected}/>
+                  <Editor content={this.state.htmlContent || this.state.content} onChange={this.setContent} countWords={countWords}/>
                 </Row>
               </Col>
               <Col xs={12} lg={4} className='mt-xs-0 pt-2 mt-lg-5'>
