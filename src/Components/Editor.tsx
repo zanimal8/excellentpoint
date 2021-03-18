@@ -32,16 +32,17 @@ const Editor: React.FC<PropTypes> = (props: PropTypes) => {
   const height = isMobile ? 300 : 445
 
   const Popover: React.FC = () => {
+    const top = 135 + bounds.top
     if (!text) { return null }
     const Tooltip = styled.div`
       position: absolute;
       left: ${bounds.left + bounds.width / 2}px;
-      top: ${140 + bounds.top}px;
+      top: ${top > 145 ? top : 145}px;
       margin-left: -75px;
       width: auto;
-      height: 1.4em;
+      padding: 0.15em 0.4em;
       background: #5dd9b2;
-      font-size: 1em;
+      font-size: 1.1em;
       pointer-events: none;
       text-align: center;
       color: white;
