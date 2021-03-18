@@ -10,32 +10,32 @@ import { Container, Row, Col } from 'react-bootstrap'
 import './App.css'
 import About from './Components/About'
 
-// String Cleaning
-const tags = ['p', 'h1', 'h2', 'h3', 'em', 'strong'].flatMap(tag => {
-  return [`<${tag}>`, `</${tag}>`]
-})
+// // String Cleaning
+// const tags = ['p', 'h1', 'h2', 'h3', 'em', 'strong'].flatMap(tag => {
+//   return [`<${tag}>`, `</${tag}>`]
+// })
 
-const specials = ['&nbsp;', '<br>']
+// const specials = ['&nbsp;', '<br>']
 
-const cleanString = (raw: string) => {
-  let cleaned = raw
-  if (cleaned) {
-    tags.forEach(tag => {
-      cleaned = cleaned.replaceAll(tag, '')
-    })
-    specials.forEach(special => {
-      cleaned = cleaned.replaceAll(special, ' ')
-    })
-  }
-  return cleaned || ''
-}
+// const cleanString = (raw: string) => {
+//   let cleaned = raw
+//   if (cleaned) {
+//     tags.forEach(tag => {
+//       cleaned = cleaned.replaceAll(tag, '')
+//     })
+//     specials.forEach(special => {
+//       cleaned = cleaned.replaceAll(special, ' ')
+//     })
+//   }
+//   return cleaned || ''
+// }
 
-const countWords = (content: string) => {
-  const test = cleanString(content)
+const countWords = (test: string) => {
+  // const test = cleanString(content)
   const matches = test.trim().match(/\b[-?'?(\w+)?]+\b/gi) || []
-  if (matches && tags.includes(matches[matches?.length - 1])) {
-    matches.pop()
-  }
+  // if (matches && tags.includes(matches[matches?.length - 1])) {
+  //   matches.pop()
+  // }
   return matches?.length ?? 0
 }
 
@@ -105,7 +105,7 @@ class App extends React.Component<{}, State> {
                 <Row className='justify-content-center d-block'>
                   <ReportArea
                     words={this.state.words}
-                    chars={cleanString(this.state.content).length}
+                    chars={this.state.content.length}
                     goal={this.state.goal}
                     onChange={this.setGoal}
                   />
