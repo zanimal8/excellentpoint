@@ -111,7 +111,7 @@ class App extends React.Component<{}, State> {
                   />
                 </Row>
                 <Row className='d-flex'>
-                  <Editor content={this.state.htmlContent} onChange={this.setContent} countWords={countWords}/>
+                  <Editor content={this.state.htmlContent || this.state.content} onChange={this.setContent} countWords={countWords}/>
                 </Row>
               </Col>
               <Col xs={12} lg={4} className='mt-xs-0 pt-2 mt-lg-5'>
