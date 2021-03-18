@@ -11,6 +11,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "atomize": "^1.0.26",
+    "quill-delta-to-plaintext": "^1.0.0",
     "quill-mobile-view": "^1.0.5",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.1",

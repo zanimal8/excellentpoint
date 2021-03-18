@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ReactQuill from 'react-quill'
 import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
+import toPlainText from 'quill-delta-to-plaintext'
 
 const styles: React.CSSProperties = {
   height: 445,
@@ -20,14 +21,10 @@ const adjs = [
   'ornate', 'rhetorical', 'succinct', 'concise', 'wordy'
 ]
 
-interface PropTypes { content: string, onChange: (value: string) => void, countWords: (content: string) => number }
+interface PropTypes { content: string, onChange: (value: string, htmlContent: string) => void, countWords: (content: string) => number }
 
 const Editor: React.FC<PropTypes> = (props: PropTypes) => {
   const [value, setValue] = useState(props.content)
-  const setVal = (val: string, delta: any, source: string, editor: any) => {
-    setValue(val)
-    props.onChange(val)
-  }
   const [bounds, setBounds] = useState({ left: 0, top: 0, height: 0, width: 0 })
   const [text, setText] = useState('')
 
@@ -61,7 +58,12 @@ const Editor: React.FC<PropTypes> = (props: PropTypes) => {
       style={{ ...styles, height }}
       theme='bubble'
       defaultValue={value || ''}
-      onChange={setVal}
+      onChange={(val, delta, source, editor) => {
+        const content = editor.getContents()
+        const plaintext: string = toPlainText(content)
+        setValue(plaintext)
+        props.onChange(plaintext, val)
+      }}
       onChangeSelection={(range, source, editor) => {
         if (!range) { setBounds({ left: 0, top: 0, height: 0, width: 0 }) } else {
           setBounds(editor.getBounds(range.index, range.length))
