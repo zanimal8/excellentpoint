@@ -10,32 +10,8 @@ import { Container, Row, Col } from 'react-bootstrap'
 import './App.css'
 import About from './Components/About'
 
-// // String Cleaning
-// const tags = ['p', 'h1', 'h2', 'h3', 'em', 'strong'].flatMap(tag => {
-//   return [`<${tag}>`, `</${tag}>`]
-// })
-
-// const specials = ['&nbsp;', '<br>']
-
-// const cleanString = (raw: string) => {
-//   let cleaned = raw
-//   if (cleaned) {
-//     tags.forEach(tag => {
-//       cleaned = cleaned.replaceAll(tag, '')
-//     })
-//     specials.forEach(special => {
-//       cleaned = cleaned.replaceAll(special, ' ')
-//     })
-//   }
-//   return cleaned || ''
-// }
-
 const countWords = (test: string) => {
-  // const test = cleanString(content)
   const matches = test.trim().match(/\b[-?'?(\w+)?]+\b/gi) || []
-  // if (matches && tags.includes(matches[matches?.length - 1])) {
-  //   matches.pop()
-  // }
   return matches?.length ?? 0
 }
 
@@ -99,9 +75,9 @@ class App extends React.Component<{}, State> {
           <Header/>
         </header>
         <section>
-          <Container className='mx-auto p-xs-3' fluid='md'>
+          <Container style={{ height: '75vh' }} className='mx-auto p-xs-3' fluid='md'>
             <Row>
-              <Col style={{ maxWidth: 850 }} xs={12} lg={8}>
+              <Col style={{ height: '100%', maxWidth: 850 }} xs={12} lg={8}>
                 <Row className='justify-content-center d-block'>
                   <ReportArea
                     words={this.state.words}
@@ -110,7 +86,7 @@ class App extends React.Component<{}, State> {
                     onChange={this.setGoal}
                   />
                 </Row>
-                <Row className='d-flex'>
+                <Row style={{ height: '100%' }}className='d-flex'>
                   <Editor content={this.state.htmlContent || this.state.content} onChange={this.setContent} countWords={countWords}/>
                 </Row>
               </Col>

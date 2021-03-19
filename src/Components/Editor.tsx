@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import toPlainText from 'quill-delta-to-plaintext'
 
 const styles: React.CSSProperties = {
-  height: 445,
+  height: '100%',
   backgroundColor: '#F8F8F8',
   border: '1px solid #CCC',
   padding: '6px 10px',
