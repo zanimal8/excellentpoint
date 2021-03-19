@@ -76,7 +76,7 @@ class App extends React.Component<{}, State> {
           <Header/>
         </header>
         <section>
-          <Container style={{ height: '75vh' }} className='mx-auto p-xs-3' fluid='md'>
+          <Container ref={editorContainer} style={{ height: '75vh' }} className='mx-auto p-xs-3' fluid='md'>
             <Row>
               <Col style={{ height: '100%', maxWidth: 850 }} xs={12} lg={8}>
                 <Row className='justify-content-center d-block'>
@@ -87,7 +87,7 @@ class App extends React.Component<{}, State> {
                     onChange={this.setGoal}
                   />
                 </Row>
-                <Row ref={editorContainer} style={{ height: '100%' }}className='d-flex'>
+                <Row style={{ height: '100%' }}className='d-flex'>
                   <Editor elementRef={editorContainer} content={this.state.htmlContent || this.state.content} onChange={this.setContent} countWords={countWords}/>
                 </Row>
               </Col>

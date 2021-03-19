@@ -48,22 +48,42 @@ const Tooltip = styled.div`
   border-radius: 3px;
 `
 
+const useResize = (ref: React.RefObject<HTMLDivElement>) => {
+  const getMargin = () => ref.current?.offsetLeft
+
+  const [margin, setMargin] = useState(0)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMargin(getMargin() || 0)
+    }
+    if (ref.current) {
+      setMargin(getMargin() || 0)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [ref])
+
+  return margin
+}
+
 const Editor: React.FC<PropTypes> = (props: PropTypes) => {
   const [value, setValue] = useState(props.content)
   const [bounds, setBounds] = useState({ left: 0, top: 0, height: 0, width: 0 })
   const [text, setText] = useState('')
-  const [width, setWidth] = useState(0)
-
-  useEffect(() => {
-    setWidth(props.elementRef?.current?.getBoundingClientRect().width || 0)
-  }, [])
+  let margin = props.elementRef?.current?.offsetLeft || 0
+  margin = useResize(props.elementRef)
 
   const isMobile = useMediaQuery({ query: '(max-width: 760px)' })
   const height = isMobile ? 300 : 445
 
   const Popover: React.FC = () => {
     const top = 135 + bounds.top
-    const left = bounds.left + bounds.width / 4 + width / 2
+    const left = bounds.width / 2 + margin + bounds.left
     if (!text) { return null }
 
     return <Tooltip top={top} left={left}>selected <strong>{props.countWords(text || '')}</strong> words</Tooltip>
