@@ -69,6 +69,7 @@ class App extends React.Component<{}, State> {
 
   render () {
     const showPrompt = this.state.drawer
+    const editorContainer = React.createRef<HTMLDivElement>()
     return (
       <div className='align-content-center'>
         <header>
@@ -86,8 +87,8 @@ class App extends React.Component<{}, State> {
                     onChange={this.setGoal}
                   />
                 </Row>
-                <Row style={{ height: '100%' }}className='d-flex'>
-                  <Editor content={this.state.htmlContent || this.state.content} onChange={this.setContent} countWords={countWords}/>
+                <Row ref={editorContainer} style={{ height: '100%' }}className='d-flex'>
+                  <Editor elementRef={editorContainer} content={this.state.htmlContent || this.state.content} onChange={this.setContent} countWords={countWords}/>
                 </Row>
               </Col>
               <Col xs={12} lg={4} className='mt-xs-0 pt-2 mt-lg-5'>

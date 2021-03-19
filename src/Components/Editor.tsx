@@ -1,8 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactQuill from 'react-quill'
 import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
 import toPlainText from 'quill-delta-to-plaintext'
+
+const adjs = [
+  'audacious', 'compelling', 'insightful', 'quirky',
+  'controversial', 'humorous', 'articulate', 'witty',
+  'confounding', 'crisp', 'eloquent', 'emphatic', 'formal',
+  'ornate', 'rhetorical', 'succinct', 'concise', 'wordy'
+]
 
 const styles: React.CSSProperties = {
   height: '100%',
@@ -14,41 +21,52 @@ const styles: React.CSSProperties = {
   fontFamily: 'Source Sans Pro'
 }
 
-const adjs = [
-  'audacious', 'compelling', 'insightful', 'quirky',
-  'controversial', 'humorous', 'articulate', 'witty',
-  'confounding', 'crisp', 'eloquent', 'emphatic', 'formal',
-  'ornate', 'rhetorical', 'succinct', 'concise', 'wordy'
-]
+interface PropTypes {
+  content: string,
+  onChange: (value: string, htmlContent: string) => void,
+  countWords: (content: string) => number
+  elementRef: React.RefObject<HTMLDivElement>
+}
 
-interface PropTypes { content: string, onChange: (value: string, htmlContent: string) => void, countWords: (content: string) => number }
+interface StyledProps {
+  left: number,
+  top: number
+}
+
+const Tooltip = styled.div`
+  position: absolute;
+  left: ${(props: StyledProps) => props.left}px;
+  top: ${(props: StyledProps) => props.top > 145 ? props.top : 145}px;
+  margin-left: -75px;
+  width: auto;
+  padding: 0.15em 0.4em;
+  background: #5dd9b2;
+  font-size: 1.1em;
+  pointer-events: none;
+  text-align: center;
+  color: white;
+  border-radius: 3px;
+`
 
 const Editor: React.FC<PropTypes> = (props: PropTypes) => {
   const [value, setValue] = useState(props.content)
   const [bounds, setBounds] = useState({ left: 0, top: 0, height: 0, width: 0 })
   const [text, setText] = useState('')
+  const [width, setWidth] = useState(0)
+
+  useEffect(() => {
+    setWidth(props.elementRef?.current?.getBoundingClientRect().width || 0)
+  }, [])
 
   const isMobile = useMediaQuery({ query: '(max-width: 760px)' })
   const height = isMobile ? 300 : 445
 
   const Popover: React.FC = () => {
     const top = 135 + bounds.top
+    const left = bounds.left + bounds.width / 4 + width / 2
     if (!text) { return null }
-    const Tooltip = styled.div`
-      position: absolute;
-      left: ${bounds.left + bounds.width / 2}px;
-      top: ${top > 145 ? top : 145}px;
-      margin-left: -75px;
-      width: auto;
-      padding: 0.15em 0.4em;
-      background: #5dd9b2;
-      font-size: 1.1em;
-      pointer-events: none;
-      text-align: center;
-      color: white;
-      border-radius: 3px;
-    `
-    return <Tooltip>selected <strong>{props.countWords(text || '')}</strong> words</Tooltip>
+
+    return <Tooltip top={top} left={left}>selected <strong>{props.countWords(text || '')}</strong> words</Tooltip>
   }
 
   return (
