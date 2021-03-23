@@ -75,8 +75,7 @@ const Editor: React.FC<PropTypes> = (props: PropTypes) => {
   const [value, setValue] = useState(props.content)
   const [bounds, setBounds] = useState({ left: 0, top: 0, height: 0, width: 0 })
   const [text, setText] = useState('')
-  let margin = props.elementRef?.current?.offsetLeft || 0
-  margin = useResize(props.elementRef)
+  const margin = useResize(props.elementRef)
 
   const isMobile = useMediaQuery({ query: '(max-width: 760px)' })
   const height = isMobile ? 300 : 445
@@ -85,8 +84,10 @@ const Editor: React.FC<PropTypes> = (props: PropTypes) => {
     const top = 135 + bounds.top
     const left = bounds.width / 2 + margin + bounds.left
     if (!text) { return null }
-
-    return <Tooltip top={top} left={left}>selected <strong>{props.countWords(text || '')}</strong> words</Tooltip>
+    if (props.countWords(text || 'null') > 2) {
+      return <Tooltip top={top} left={left}>selected <strong>{props.countWords(text || '')}</strong> words</Tooltip>
+    }
+    return null
   }
 
   return (
