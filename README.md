@@ -3,7 +3,7 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 # excellentpoint
-<strong>Excellent Point</strong> is a simple typing workspace made for students trying to hit a word count. The aesthetically pleasing combination of helpful visual tools and a healthy amount of gamification make the writing process just a little bit easier!
+<strong>Excellent Point</strong> is a simple typing workspace made for students trying to hit a word count. The aesthetically pleasing combination of helpful visual tools and a healthy amount of [gamification](https://en.wikipedia.org/wiki/Gamification) make the writing process just a little bit easier!
 
 The first version of this website was part of a one-week prototype sprint for a design thinking class, and it was fleshed out more fully while procrastinating work for AP English.
 
